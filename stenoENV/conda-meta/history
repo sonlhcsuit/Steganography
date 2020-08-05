@@ -1,0 +1,23 @@
+==> 2020-08-05 18:26:35 <==
+# cmd: /Users/apple/anaconda3/bin/conda create --prefix ./stenoENV
+# conda version: 4.8.2
+==> 2020-08-05 18:31:12 <==
+# cmd: /Users/apple/anaconda3/bin/conda install --prefix ./stenoENV pip
+# conda version: 4.8.2
++defaults/osx-64::ca-certificates-2020.6.24-0
++defaults/osx-64::certifi-2020.6.20-py38_0
++defaults/osx-64::libcxx-10.0.0-1
++defaults/osx-64::libedit-3.1.20191231-h1de35cc_1
++defaults/osx-64::libffi-3.3-hb1e8313_2
++defaults/osx-64::ncurses-6.2-h0a44026_1
++defaults/osx-64::openssl-1.1.1g-h1de35cc_0
++defaults/osx-64::pip-20.1.1-py38_1
++defaults/osx-64::python-3.8.5-h26836e1_0
++defaults/osx-64::readline-8.0-h1de35cc_0
++defaults/osx-64::setuptools-49.2.0-py38_0
++defaults/osx-64::sqlite-3.32.3-hffcf06c_0
++defaults/osx-64::tk-8.6.10-hb0a8c7a_0
++defaults/osx-64::wheel-0.34.2-py38_0
++defaults/osx-64::xz-5.2.5-h1de35cc_0
++defaults/osx-64::zlib-1.2.11-h1de35cc_3
+# update specs: ['pip']
