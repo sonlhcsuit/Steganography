@@ -172,20 +172,26 @@ def get_data_from_img(type=MESSAGE,image=None,image_path=None):
         raise Exception("Your Input Is Not Valid!")
 def STEGANO():
     is_encode = input("Wanna encode an image or decode an image encoded by us?\n0.Encode\n1.Decode\n")
-    print(is_encode)
+    # print(is_encode)
+    hidden_image_path=''
     if is_encode =="0":
         is_text = input(
             'Wanna hide text message into image or image into image - hidden image size must be smaller 25% of container image size!\n0.MESSAGE\n1.IMAGE\n')
         container_path = input("Enter container image relative path:")
+        new_img = None
         if is_text == "0":
             hidden_text = input("Enter text message you wanna hide:")
+            new_img = hide_data_to_img(type=MESSAGE,
+                                       data=hidden_text,
+                                       image_path=container_path)
         else:
             hidden_image_path = input("Enter hidden image relative path:")
+            new_img = hide_data_to_img(type=IMAGE,
+                                       data=cv2.imread(hidden_image_path),
+                                       image_path=container_path)
         encoded_image = input(
             "Enter name of container image after hidden data. It will be at the same folder and has png extension:")
-        new_img = hide_data_to_img(type=MESSAGE if is_text is True else IMAGE,
-                                   data=hidden_text if is_text is True else cv2.imread(hidden_image_path),
-                                   image_path=container_path)
+
         cv2.imwrite(encoded_image + '.png', new_img)
         print("Save Successful!")
     else:
