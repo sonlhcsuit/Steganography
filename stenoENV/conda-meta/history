@@ -21,3 +21,38 @@
 +defaults/osx-64::xz-5.2.5-h1de35cc_0
 +defaults/osx-64::zlib-1.2.11-h1de35cc_3
 # update specs: ['pip']
+==> 2020-08-09 14:12:04 <==
+# cmd: /Users/apple/anaconda3/bin/conda install -c conda-forge kivy
+# conda version: 4.8.2
+-defaults/osx-64::ca-certificates-2020.6.24-0
+-defaults/osx-64::certifi-2020.6.20-py38_0
+-defaults/osx-64::openssl-1.1.1g-h1de35cc_0
++conda-forge/noarch::olefile-0.46-py_0
++conda-forge/noarch::pygments-2.6.1-py_0
++conda-forge/osx-64::ca-certificates-2020.6.20-hecda079_0
++conda-forge/osx-64::certifi-2020.6.20-py38h32f6830_0
++conda-forge/osx-64::docutils-0.16-py38h32f6830_1
++conda-forge/osx-64::freetype-2.10.2-h8da9a1a_0
++conda-forge/osx-64::gettext-0.19.8.1-h1f1d5ed_1
++conda-forge/osx-64::gst-plugins-base-1.14.5-hb4a159a_2
++conda-forge/osx-64::gstreamer-1.14.5-h06b91d7_2
++conda-forge/osx-64::jpeg-9d-h0b31af3_0
++conda-forge/osx-64::kivy-1.11.1-py38h6b1efc5_3
++conda-forge/osx-64::lcms2-2.11-h174193d_0
++conda-forge/osx-64::libpng-1.6.37-hbbe82c9_1
++conda-forge/osx-64::libtiff-4.1.0-h2ae36a8_6
++conda-forge/osx-64::libwebp-base-1.1.0-h0b31af3_3
++conda-forge/osx-64::lz4-c-1.9.2-h4a8c4bd_1
++conda-forge/osx-64::openssl-1.1.1g-h0b31af3_1
++conda-forge/osx-64::pcre-8.44-h4a8c4bd_0
++conda-forge/osx-64::pillow-7.2.0-py38h83dc5e5_1
++conda-forge/osx-64::python_abi-3.8-1_cp38
++conda-forge/osx-64::sdl2-2.0.10-h6de7cb9_0
++conda-forge/osx-64::sdl2_image-2.0.5-h7fada4f_0
++conda-forge/osx-64::sdl2_mixer-2.0.4-h6de7cb9_0
++conda-forge/osx-64::sdl2_ttf-2.0.15-hc42bb53_0
++conda-forge/osx-64::smpeg2-2.0.0-hfc679d8_1
++conda-forge/osx-64::zstd-1.4.5-h0384e3a_1
++defaults/osx-64::glib-2.65.0-hc5f4afa_0
++defaults/osx-64::libiconv-1.16-h1de35cc_0
+# update specs: ['kivy']

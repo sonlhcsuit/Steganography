@@ -1,4 +1,4 @@
-#!/Users/apple/silver/projects/PERSONAL/STEGANOGRAPHY/stenoENV/bin/perl
+#!/usr/bin/env perl
 # Copyright 2000-2018 The OpenSSL Project Authors. All Rights Reserved.
 #
 # Licensed under the OpenSSL license (the "License").  You may not use

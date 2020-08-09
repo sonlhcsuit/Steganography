@@ -1,0 +1,196 @@
+{
+  "build": "hfc679d8_1",
+  "build_number": 1,
+  "channel": "https://conda.anaconda.org/conda-forge/osx-64",
+  "constrains": [],
+  "depends": [
+    "sdl2"
+  ],
+  "extracted_package_dir": "/Users/apple/anaconda3/pkgs/smpeg2-2.0.0-hfc679d8_1",
+  "features": "",
+  "files": [
+    "bin/plaympeg",
+    "bin/smpeg2-config",
+    "include/smpeg2/MPEG.h",
+    "include/smpeg2/MPEGaction.h",
+    "include/smpeg2/MPEGaudio.h",
+    "include/smpeg2/MPEGerror.h",
+    "include/smpeg2/MPEGframe.h",
+    "include/smpeg2/MPEGlist.h",
+    "include/smpeg2/MPEGring.h",
+    "include/smpeg2/MPEGstream.h",
+    "include/smpeg2/MPEGsystem.h",
+    "include/smpeg2/MPEGvideo.h",
+    "include/smpeg2/smpeg.h",
+    "lib/libsmpeg2-2.0.0.dylib",
+    "lib/libsmpeg2.a",
+    "lib/libsmpeg2.dylib",
+    "lib/libsmpeg2.la",
+    "share/aclocal/smpeg2.m4",
+    "share/man/man1/plaympeg.1"
+  ],
+  "fn": "smpeg2-2.0.0-hfc679d8_1.tar.bz2",
+  "license": "GPLv2",
+  "link": {
+    "source": "/Users/apple/anaconda3/pkgs/smpeg2-2.0.0-hfc679d8_1",
+    "type": 1
+  },
+  "md5": "8cdb1f574af83a5498f6c9a472b8b238",
+  "name": "smpeg2",
+  "package_tarball_full_path": "/Users/apple/anaconda3/pkgs/smpeg2-2.0.0-hfc679d8_1.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/plaympeg",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/Users/travis/miniconda3/conda-bld/smpeg2_1532950533007/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pl",
+        "sha256": "ccdf584c322f335ac0a592fa8a686a382b658322dc4ab66c2b067cfaa30aa8d8",
+        "sha256_in_prefix": "5fa5217969cbb0b7c2723f269156737cd2e0facb9d768ac3a6b5bb975490cfb8",
+        "size_in_bytes": 28264
+      },
+      {
+        "_path": "bin/smpeg2-config",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/opt/anaconda1anaconda2anaconda3",
+        "sha256": "97c900822f409b67291283c6a6c5725c77b225fa0b506333e9d2e90b200c55a8",
+        "sha256_in_prefix": "385a1e65bb052b6418ca5e36cf369c7da4899b66227308296d2a30b0deeb56d2",
+        "size_in_bytes": 1249
+      },
+      {
+        "_path": "include/smpeg2/MPEG.h",
+        "path_type": "hardlink",
+        "sha256": "3c8bd6a8e6d4bc072be2c79172192c52dea8a3f5ec96eb05336b2d87dadd8325",
+        "sha256_in_prefix": "3c8bd6a8e6d4bc072be2c79172192c52dea8a3f5ec96eb05336b2d87dadd8325",
+        "size_in_bytes": 4170
+      },
+      {
+        "_path": "include/smpeg2/MPEGaction.h",
+        "path_type": "hardlink",
+        "sha256": "19c5eb88ffd0267be401fb487108b4fa10ef0253e5371884280cf2d6d430ff4a",
+        "sha256_in_prefix": "19c5eb88ffd0267be401fb487108b4fa10ef0253e5371884280cf2d6d430ff4a",
+        "size_in_bytes": 3571
+      },
+      {
+        "_path": "include/smpeg2/MPEGaudio.h",
+        "path_type": "hardlink",
+        "sha256": "370ab7a2b5bec712f9741d80580f5f61ef0f3d345d2ef87f4ee1d5aca7ec3f11",
+        "sha256_in_prefix": "370ab7a2b5bec712f9741d80580f5f61ef0f3d345d2ef87f4ee1d5aca7ec3f11",
+        "size_in_bytes": 10423
+      },
+      {
+        "_path": "include/smpeg2/MPEGerror.h",
+        "path_type": "hardlink",
+        "sha256": "666ec986e84532f78e63e728bb7cbf4c3f5447ebe7896fcb575a0c155f2541a8",
+        "sha256_in_prefix": "666ec986e84532f78e63e728bb7cbf4c3f5447ebe7896fcb575a0c155f2541a8",
+        "size_in_bytes": 1581
+      },
+      {
+        "_path": "include/smpeg2/MPEGframe.h",
+        "path_type": "hardlink",
+        "sha256": "e9f622194969ff03c1b5430d4c1a4115dafe6133b313f7bc3758bddf0edc040e",
+        "sha256_in_prefix": "e9f622194969ff03c1b5430d4c1a4115dafe6133b313f7bc3758bddf0edc040e",
+        "size_in_bytes": 1091
+      },
+      {
+        "_path": "include/smpeg2/MPEGlist.h",
+        "path_type": "hardlink",
+        "sha256": "bb51d62d488ea399da93ba174dcf9787340870672c4ab3977f84c973194b66ca",
+        "sha256_in_prefix": "bb51d62d488ea399da93ba174dcf9787340870672c4ab3977f84c973194b66ca",
+        "size_in_bytes": 831
+      },
+      {
+        "_path": "include/smpeg2/MPEGring.h",
+        "path_type": "hardlink",
+        "sha256": "4bc39a7394c78d385ce75812b22e63170339ccfbd6e9b6a92a9fee944c3b45ef",
+        "sha256_in_prefix": "4bc39a7394c78d385ce75812b22e63170339ccfbd6e9b6a92a9fee944c3b45ef",
+        "size_in_bytes": 2758
+      },
+      {
+        "_path": "include/smpeg2/MPEGstream.h",
+        "path_type": "hardlink",
+        "sha256": "5305469f9149722334be466add1087a13760fb5e7b2552f956fe466041b4b55b",
+        "sha256_in_prefix": "5305469f9149722334be466add1087a13760fb5e7b2552f956fe466041b4b55b",
+        "size_in_bytes": 2956
+      },
+      {
+        "_path": "include/smpeg2/MPEGsystem.h",
+        "path_type": "hardlink",
+        "sha256": "048c27ee5dffae152ccff5355853dcf3cf4f6863d4a00a14e15d2217eac5fd8a",
+        "sha256_in_prefix": "048c27ee5dffae152ccff5355853dcf3cf4f6863d4a00a14e15d2217eac5fd8a",
+        "size_in_bytes": 3129
+      },
+      {
+        "_path": "include/smpeg2/MPEGvideo.h",
+        "path_type": "hardlink",
+        "sha256": "5f57da9a38aeec582aea1984dc38613bbc539c523f36e74612ba5a2b04f22d19",
+        "sha256_in_prefix": "5f57da9a38aeec582aea1984dc38613bbc539c523f36e74612ba5a2b04f22d19",
+        "size_in_bytes": 3135
+      },
+      {
+        "_path": "include/smpeg2/smpeg.h",
+        "path_type": "hardlink",
+        "sha256": "89e62916f4044d83b24995aed1a19ac41560c2e2f7dbf2f45a1f5c5b98c1740d",
+        "sha256_in_prefix": "89e62916f4044d83b24995aed1a19ac41560c2e2f7dbf2f45a1f5c5b98c1740d",
+        "size_in_bytes": 6531
+      },
+      {
+        "_path": "lib/libsmpeg2-2.0.0.dylib",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/Users/travis/miniconda3/conda-bld/smpeg2_1532950533007/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pl",
+        "sha256": "fa211994ca1b18b00374d340777afd7ca8bc7b26ebc174812168c98fe98c4898",
+        "sha256_in_prefix": "97cc2d4b7a7e2d511ba247be4f16ce20d51e808b95c090d4369bb1d8b8181eed",
+        "size_in_bytes": 389948
+      },
+      {
+        "_path": "lib/libsmpeg2.a",
+        "path_type": "hardlink",
+        "sha256": "987d1a71b46d7bcf1a74cc143800acfb3f3867bb7918f61b463358df2997f449",
+        "sha256_in_prefix": "987d1a71b46d7bcf1a74cc143800acfb3f3867bb7918f61b463358df2997f449",
+        "size_in_bytes": 459128
+      },
+      {
+        "_path": "lib/libsmpeg2.dylib",
+        "file_mode": "binary",
+        "path_type": "softlink",
+        "prefix_placeholder": "/Users/travis/miniconda3/conda-bld/smpeg2_1532950533007/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pl",
+        "sha256": "fa211994ca1b18b00374d340777afd7ca8bc7b26ebc174812168c98fe98c4898",
+        "size_in_bytes": 389948
+      },
+      {
+        "_path": "lib/libsmpeg2.la",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/opt/anaconda1anaconda2anaconda3",
+        "sha256": "55d2818f34413c147fbcd9ac5cae41078c7802105e3f282060c5d5f0a3199c25",
+        "sha256_in_prefix": "dd192fa51c79a916283ea55c790e5fb74417700bbc1b84602cc79f4a61d31447",
+        "size_in_bytes": 1066
+      },
+      {
+        "_path": "share/aclocal/smpeg2.m4",
+        "path_type": "hardlink",
+        "sha256": "a72b5b3696ee204adfaa09f23fcdb15c12c3888ff4b11013add4b9b84e0da3ad",
+        "sha256_in_prefix": "a72b5b3696ee204adfaa09f23fcdb15c12c3888ff4b11013add4b9b84e0da3ad",
+        "size_in_bytes": 6625
+      },
+      {
+        "_path": "share/man/man1/plaympeg.1",
+        "path_type": "hardlink",
+        "sha256": "cb1e0b3ad596658bfe668c021c4c1906f8bb428672aa478cf6c79dcdb98c59f2",
+        "sha256_in_prefix": "cb1e0b3ad596658bfe668c021c4c1906f8bb428672aa478cf6c79dcdb98c59f2",
+        "size_in_bytes": 1672
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "aa0de40e268713bc251c9d03ec20881df33e65230c5bedc245b84dd860e03aef",
+  "size": 161491,
+  "subdir": "osx-64",
+  "timestamp": 1532950664194,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/osx-64/smpeg2-2.0.0-hfc679d8_1.tar.bz2",
+  "version": "2.0.0"
+}

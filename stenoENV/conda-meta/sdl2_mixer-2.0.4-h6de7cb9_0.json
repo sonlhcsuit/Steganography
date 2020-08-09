@@ -1,0 +1,82 @@
+{
+  "build": "h6de7cb9_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/conda-forge/osx-64",
+  "constrains": [],
+  "depends": [
+    "libcxx >=4.0.1",
+    "sdl2 2.0.*",
+    "smpeg2 2.0.*"
+  ],
+  "extracted_package_dir": "/Users/apple/anaconda3/pkgs/sdl2_mixer-2.0.4-h6de7cb9_0",
+  "features": "",
+  "files": [
+    "include/SDL2/SDL_mixer.h",
+    "lib/libSDL2_mixer-2.0.0.dylib",
+    "lib/libSDL2_mixer.a",
+    "lib/libSDL2_mixer.dylib",
+    "lib/pkgconfig/SDL2_mixer.pc"
+  ],
+  "fn": "sdl2_mixer-2.0.4-h6de7cb9_0.tar.bz2",
+  "license": "ZLIB",
+  "link": {
+    "source": "/Users/apple/anaconda3/pkgs/sdl2_mixer-2.0.4-h6de7cb9_0",
+    "type": 1
+  },
+  "md5": "333aa85967ea58b541d91e8f39877147",
+  "name": "sdl2_mixer",
+  "package_tarball_full_path": "/Users/apple/anaconda3/pkgs/sdl2_mixer-2.0.4-h6de7cb9_0.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "include/SDL2/SDL_mixer.h",
+        "path_type": "hardlink",
+        "sha256": "4a2f6bb30a144b881f133499d13d18098034fcc95af1517ac0580d5d09c2ee63",
+        "sha256_in_prefix": "4a2f6bb30a144b881f133499d13d18098034fcc95af1517ac0580d5d09c2ee63",
+        "size_in_bytes": 28872
+      },
+      {
+        "_path": "lib/libSDL2_mixer-2.0.0.dylib",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/usr/local/miniconda/conda-bld/sdl2_mixer_1556695935065/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pl",
+        "sha256": "78a074afb9d0c16fc4566d2454eff502cf9afbeeabadb8585c0352b8cb1b0d4e",
+        "sha256_in_prefix": "7c0c4039b6a068517567c593cca7a498b6d6a61885587b5b0789f9abf613c0e7",
+        "size_in_bytes": 133780
+      },
+      {
+        "_path": "lib/libSDL2_mixer.a",
+        "path_type": "hardlink",
+        "sha256": "d1cd87de4408da71071f7a0e906b851d19b750320e56c52f609c1e6743e068db",
+        "sha256_in_prefix": "d1cd87de4408da71071f7a0e906b851d19b750320e56c52f609c1e6743e068db",
+        "size_in_bytes": 186288
+      },
+      {
+        "_path": "lib/libSDL2_mixer.dylib",
+        "file_mode": "binary",
+        "path_type": "softlink",
+        "prefix_placeholder": "/usr/local/miniconda/conda-bld/sdl2_mixer_1556695935065/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pl",
+        "sha256": "78a074afb9d0c16fc4566d2454eff502cf9afbeeabadb8585c0352b8cb1b0d4e",
+        "size_in_bytes": 133780
+      },
+      {
+        "_path": "lib/pkgconfig/SDL2_mixer.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/opt/anaconda1anaconda2anaconda3",
+        "sha256": "891c2eafaba2b7c8634b4beb70aad7e87240864bb1af7cc455109aa698f611e5",
+        "sha256_in_prefix": "be2cbb04260aa879aaa4c8b4f9a7faa4e689fad46a522b7d7d069e2bd99f0cef",
+        "size_in_bytes": 291
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "9b6ee3fc7acc75d88c1c6d543ed3f0589581b96c001f4bc67c7d3f445351d9c0",
+  "size": 115320,
+  "subdir": "osx-64",
+  "timestamp": 1556696101744,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/osx-64/sdl2_mixer-2.0.4-h6de7cb9_0.tar.bz2",
+  "version": "2.0.4"
+}

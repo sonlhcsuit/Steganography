@@ -1,0 +1,81 @@
+{
+  "build": "hc42bb53_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/conda-forge/osx-64",
+  "constrains": [],
+  "depends": [
+    "freetype >=2.9.1,<3.0a0",
+    "sdl2 2.0.*"
+  ],
+  "extracted_package_dir": "/Users/apple/anaconda3/pkgs/sdl2_ttf-2.0.15-hc42bb53_0",
+  "features": "",
+  "files": [
+    "include/SDL2/SDL_ttf.h",
+    "lib/libSDL2_ttf-2.0.0.dylib",
+    "lib/libSDL2_ttf.a",
+    "lib/libSDL2_ttf.dylib",
+    "lib/pkgconfig/SDL2_ttf.pc"
+  ],
+  "fn": "sdl2_ttf-2.0.15-hc42bb53_0.tar.bz2",
+  "license": "ZLIB",
+  "link": {
+    "source": "/Users/apple/anaconda3/pkgs/sdl2_ttf-2.0.15-hc42bb53_0",
+    "type": 1
+  },
+  "md5": "c6dd7a190a12565f92ca99825b9d5ea2",
+  "name": "sdl2_ttf",
+  "package_tarball_full_path": "/Users/apple/anaconda3/pkgs/sdl2_ttf-2.0.15-hc42bb53_0.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "include/SDL2/SDL_ttf.h",
+        "path_type": "hardlink",
+        "sha256": "d8812df3f415637d49ea647d66d10d4ba7cead505445a5d8e6d089a92052d58b",
+        "sha256_in_prefix": "d8812df3f415637d49ea647d66d10d4ba7cead505445a5d8e6d089a92052d58b",
+        "size_in_bytes": 13072
+      },
+      {
+        "_path": "lib/libSDL2_ttf-2.0.0.dylib",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/usr/local/miniconda/conda-bld/sdl2_ttf_1556176387930/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_plac",
+        "sha256": "720fd9393dddbc151cd643da79566ee80559fb9ab44ee3ffa1ab87c14f6ded68",
+        "sha256_in_prefix": "f8082f6114e756754b072fd5db9cab635075c1fbc4be446167aabcf8d84d8572",
+        "size_in_bytes": 38268
+      },
+      {
+        "_path": "lib/libSDL2_ttf.a",
+        "path_type": "hardlink",
+        "sha256": "4a50a407f59994dfb1f46058c9f5d3d5d8d1326e7a47df1866e323e08b91bf25",
+        "sha256_in_prefix": "4a50a407f59994dfb1f46058c9f5d3d5d8d1326e7a47df1866e323e08b91bf25",
+        "size_in_bytes": 32176
+      },
+      {
+        "_path": "lib/libSDL2_ttf.dylib",
+        "file_mode": "binary",
+        "path_type": "softlink",
+        "prefix_placeholder": "/usr/local/miniconda/conda-bld/sdl2_ttf_1556176387930/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_plac",
+        "sha256": "720fd9393dddbc151cd643da79566ee80559fb9ab44ee3ffa1ab87c14f6ded68",
+        "size_in_bytes": 38268
+      },
+      {
+        "_path": "lib/pkgconfig/SDL2_ttf.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/opt/anaconda1anaconda2anaconda3",
+        "sha256": "8185d120419a9eb056252e065e540b652579b311de16756ba4f364f5f075b933",
+        "sha256_in_prefix": "498caee0f5d672ba6e2b82584c437e5d91c456574bf4d1ea431ede410a01dd9c",
+        "size_in_bytes": 309
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "81b9dd9eb4401d7a6d4fa0a8ba74a98aae524d0815cba3534cd4557d1e0c9f54",
+  "size": 29883,
+  "subdir": "osx-64",
+  "timestamp": 1556176521636,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/osx-64/sdl2_ttf-2.0.15-hc42bb53_0.tar.bz2",
+  "version": "2.0.15"
+}
