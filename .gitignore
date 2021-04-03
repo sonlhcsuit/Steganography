@@ -6,3 +6,4 @@ data/
 decoded/
 encoded/
 env/
+.DS_Store
