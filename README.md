@@ -16,7 +16,7 @@ $ pip install -r requirements.txt
 (env)$ python app.py
 ```
 Author:   
-@Luu Hoang Son
+@Luu Hoang Son  
 @Truong Duc Vu  
 @Tran Trung Anh   
 
