@@ -1,6 +1,6 @@
 # STEGANOGRAPHY
 
-It's simple steganography tool for CS232
+It's simple Steganography tool for CS232
 
 To use it, clone it using git clone:
 ```sh
@@ -16,6 +16,7 @@ $ conda activate stenoENV
 (stenoENV)$ python3 app.py
 ```
 Author:   
+@Luu Hoang Son
 @Truong Duc Vu  
 @Tran Trung Anh   
-@luu Hoang Son
+

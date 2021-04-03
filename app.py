@@ -40,7 +40,7 @@ containers_dir,data_dir,encoded_dir,decoded_dir = init_dirs()
 app = Flask(__name__)
 @app.route('/',methods=['GET'])
 def html():
-    f = open('web/index.html')
+    f = open(os.path.join(os.getcwd(),'web/index.html'))
     data = f.read()
     return data
 @app.route('/home',methods=['POST','GET'])
@@ -129,4 +129,6 @@ def do_decode_stuff():
     return {"error":"Internal Server Error"},500
 
 if __name__ == '__main__':
+    print(os.path.join(os.getcwd(),'web/index.html'))
+    os.system("pwd")
     app.run(debug=True)
