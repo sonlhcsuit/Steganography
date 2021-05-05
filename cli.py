@@ -1,10 +1,15 @@
 from argparse import ArgumentParser,ArgumentError
+from core import Steganography
 
 
+def main(parser,arg):
+    try:
+        parser.error("Cannot perfrom")
+        print(arg)
+    except Exception as e:
+        Exception().
+        parser.error(e)
 
-def main(arg):
-    print(arg)
-    pass
 
 
 def parserArgs():
@@ -19,13 +24,11 @@ def parserArgs():
 
     args = parser.parse_args()
     if args.action == "encode" and not args.message :
-        parser.error("When encode action was chose, message must be provided")
-    if args
-        # raise ArgumentError("When encode action was chose, message must be provided")
-    return vars(args)
+        parser.error("When encode action was chose, \'message\' must be provided")
+    return parser,vars(args)
 
 
 if __name__ == '__main__':
 
-    args = parserArgs()
-    main(args)
+    parser,args = parserArgs()
+    main(parser,args)

@@ -12,23 +12,29 @@ lena='lena.jpg'
 MESSAGE = 'MESSAGE'
 IMAGE = 'IMAGE'
 class Steganography:
-    def __init__(self, container_path, start_set='@@@@@', terminal_set='$$$$$'):
+
+    def __init__(self, container_path, delimiter='@@@@@'):
         if container_path is None:
             raise Exception("Must provide the container image path!")
-        self.container = cv2.imread(container_path)
-        self.starts = start_set
-        self.terminals = terminal_set
+        self.container = container_path
+        self.delimiter = delimiter
+
+
+
+
+
+
 
     def is_encodable(self, data, type=MESSAGE):
         data_length = 0
         if type == MESSAGE:
-            data_length = (len(data) + (len(self.starts)+len(self.terminals))) *8
+            data_length = (len(data) + (len(self.delimiter)+len(self.delimiter))) *8
         elif type == IMAGE:
             if data.shape is None or len(data.shape) != 3:
                 raise Exception("Data must be an 3d numpy array")
 
             h, w, _ = data.shape
-            data_length = (h * w * 3 + (len(self.starts)+len(self.terminals))) * 8
+            data_length = (h * w * 3 + (len(self.delimiter)+len(self.delimiter))) * 8
         else:
             raise Exception("Must provide data type: MESSAGE or IMAGE")
         height, width, _ = self.container.shape
