@@ -1,13 +1,20 @@
 from argparse import ArgumentParser,ArgumentError
+import os
+# import cv2
 from core import Steganography
 
 
 def main(parser,arg):
     try:
-        parser.error("Cannot perfrom")
-        print(arg)
+        current_path = os.getcwd();
+        cont_image_path = os.path.join(current_path,arg['container'])
+        size = os.path.getsize(current_path)
+        print(cont_image_path)
+        print(size)
+
+
+
     except Exception as e:
-        Exception().
         parser.error(e)
 
 
