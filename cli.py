@@ -1,17 +1,17 @@
 from argparse import ArgumentParser,ArgumentError
 import os
-# import cv2
-from core import Steganography
+from core import Steganography,IMAGE,MESSAGE
 
 
 def main(parser,arg):
     try:
+        print(arg)
         current_path = os.getcwd();
         cont_image_path = os.path.join(current_path,arg['container'])
-        size = os.path.getsize(current_path)
-        print(cont_image_path)
-        print(size)
-
+        steg = Steganography(cont_image_path)
+        if not steg.is_encodable(arg['message'],IMAGE):
+            parser.error(f"Cannot encode, data to be encoded must lower than one quarter of container size")
+        steg
 
 
     except Exception as e:
@@ -20,11 +20,10 @@ def main(parser,arg):
 
 
 def parserArgs():
-    parser = ArgumentParser(description="CLI to encode an image or message into another image using 3 least significant bits. "
-        + "Remember")
+    parser = ArgumentParser(description="CLI to encode an image or message into another image using 2 least significant bits.")
     parser.add_argument('action',help="Action to be perform, decode or encode")
     parser.add_argument('container',help="Container image, which carry messages")
-    parser.add_argument('--message',help="Message to be encoded. If image, must use flag -i",type=str)
+    parser.add_argument('--message','-m',help="Message to be encoded. If image, must use flag -i",type=str)
     parser.add_argument('--image','-i',help="Must be specified if image are selected",type=bool)
     parser.add_argument('--delimiter','-d',help="Custom delimiter, default is \'@@@@@\'")
     parser.add_argument('--output-name','-o',help="Output filepath/filename, if not specified, postfix \"encoded\" or \"decoded\" will be add")
