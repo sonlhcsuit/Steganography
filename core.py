@@ -165,8 +165,7 @@ class Steganography:
         :param type: type of hidden data. If type is MESSAGE, decoded data is message as string. If tyoe is IMAGE, data is image as 3d numpy array
         :return: encoded data
         """
-
-        encoded_image: np.ndarray = cv2.imread(os.path.join(os.getcwd(), 'encoded.png'))
+        encoded_image: np.ndarray = cv2.imread(self.container)
         encoded_image_flatten = encoded_image.reshape(-1)
         bits_sequence = np.vectorize(get_lsb)(encoded_image_flatten)
 

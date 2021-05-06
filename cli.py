@@ -4,17 +4,23 @@ from core import Steganography, IMAGE, MESSAGE
 
 
 def main(parser, arg):
-    # try:
-    print(arg)
-    current_path = os.getcwd();
-    cont_image_path = os.path.join(current_path, arg['container'])
-    steg = Steganography(cont_image_path)
-    if not steg.is_encodable(arg['message'], IMAGE if arg['image'] else MESSAGE):
-        parser.error(f"Cannot encode, data to be encoded must lower than one quarter of container size")
-    encoded = steg.encode(arg.get('message'), IMAGE if arg['image'] else MESSAGE)
-    # print(encoded)
-    # except Exception as e:
-        # parser.error(e)
+    try:
+        print(arg)
+        current_path = os.getcwd();
+        cont_image_path = os.path.join(current_path, arg['container'])
+        steg = Steganography(cont_image_path)
+        if arg['action'] == 'encode':
+            if not steg.is_encodable(arg['message'], IMAGE if arg['image'] else MESSAGE):
+                parser.error(f"Cannot encode, data to be encoded must lower than one quarter of container size")
+            encoded = steg.encode(arg.get('message'), IMAGE if arg['image'] else MESSAGE)
+            Steganography.save(encoded, IMAGE, os.path.join(os.getcwd(), 'ecd'))
+        elif arg['action'] == 'decode':
+            decoded = steg.decode(type=IMAGE if arg['image'] else MESSAGE)
+            Steganography.save(decoded, IMAGE, os.path.join(os.getcwd(), 'dcd'))
+
+        # print(encoded)
+    except Exception as e:
+        parser.error(e)
 
 
 def parserArgs():
