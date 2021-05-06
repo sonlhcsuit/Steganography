@@ -9,10 +9,10 @@ def main(parser,arg):
         current_path = os.getcwd();
         cont_image_path = os.path.join(current_path,arg['container'])
         steg = Steganography(cont_image_path)
-        if not steg.is_encodable(arg['message'],IMAGE):
+        if not steg.is_encodable(arg['message'],MESSAGE):
             parser.error(f"Cannot encode, data to be encoded must lower than one quarter of container size")
-        steg
-
+        v = steg.string_to_bits_sequence(arg['message'])
+        u = steg.bits_sequence_to_string(v)
 
     except Exception as e:
         parser.error(e)

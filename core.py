@@ -1,7 +1,8 @@
 import numpy as np
-import cv2
-import sys
-import os
+import cv2,sys,os
+from ultis import char_to_8_bit_string
+
+from more_itertools import grouper
 
 origin = 'original_image.jpeg'
 to_be_hidden_image = 'to_be_hidden_image.jpeg'
@@ -24,7 +25,7 @@ class Steganography:
         self.delimiter = delimiter
 
     def is_encodable(self, data: str, type: str = MESSAGE) -> bool:
-        container_len:int = os.path.getsize(self.container)
+        container_len: int = os.path.getsize(self.container)
         if type == MESSAGE:
             # Check whether a text can be encoded into a image
             delimiter_len = sys.getsizeof(self.delimiter)
@@ -99,7 +100,7 @@ class Steganography:
 
     # New Code
 
-    def encode(self, data:str, type:str):
+    def encode(self, data: str, type: str):
         """
         :param data: data to be encoded into the container str. If type is MESSAGE, data is the message. If type is IMAGE, data is the image path as string
         :param type: type of data. Im
@@ -112,55 +113,45 @@ class Steganography:
         Example: If we have an 512x512 image, we can hide an 196598-letters-string into it.
         (512x512x8x3x0.25 - 10*8)/8
         """
+        print("Checking compatible...")
+        if not self.is_encodable(data=data, type=type):
+            raise Exception("Cannot encoding data into container, size of message exceed limit")
+
+        print("Compatible!")
+        print("Starting convert data...")
+        data_as_bits_string = ""
+        if type == MESSAGE:
+            formatted_message = '{starts}{content}{terminals}'.format(starts=self.starts, content=data,
+                                                                      terminals=self.terminals)
+            data_as_bits_string = self.letter_to_bits_string(formatted_message)
         if type == IMAGE:
-            data = cv2.imread(data)
-        elif type == MESSAGE:
-            pass
-        else:
-            raise Exception("Type of encoded data is not supported")
-        print("Checking compatible...", )
-        if self.is_encodable(type=type, data=data):
-            print("Compatible!")
-            print("Starting convert data...")
-            data_as_bits_string = ""
-            if type == MESSAGE:
-                formatted_message = '{starts}{content}{terminals}'.format(starts=self.starts, content=data,
-                                                                          terminals=self.terminals)
-                data_as_bits_string = self.letter_to_bits_string(formatted_message)
-            if type == IMAGE:
-                imgbit = self.letter_to_bits_string(self.starts)
-                for line in data:
-                    for pixel in line:
-                        a = list(map(self.letter_to_bits_string, pixel))
-                        imgbit = imgbit + ''.join(a)
-                imgbit = imgbit + format(data.shape[0], '016b') + format(data.shape[1], '016b')
-                data_as_bits_string = imgbit + self.letter_to_bits_string(self.terminals)
-            container_as_bits = self.image_to_bits_string(self.container)
-            container_length = len(container_as_bits)
-            data_length = len(data_as_bits_string)
-            print("Starting encode...")
-            index = 0
-            encoded_bits = ''
+            imgbit = self.letter_to_bits_string(self.starts)
+            for line in data:
+                for pixel in line:
+                    a = list(map(self.letter_to_bits_string, pixel))
+                    imgbit = imgbit + ''.join(a)
+            imgbit = imgbit + format(data.shape[0], '016b') + format(data.shape[1], '016b')
+            data_as_bits_string = imgbit + self.letter_to_bits_string(self.terminals)
+        container_as_bits = self.image_to_bits_string(self.container)
+        container_length = len(container_as_bits)
+        data_length = len(data_as_bits_string)
+        print("Starting encode...")
+        index = 0
+        encoded_bits = ''
 
-            for a in range(0, container_length, 8):
-                channel8bits = container_as_bits[a:a + 8]
-                data2bit = data_as_bits_string[index:index + 2]
-                index = index + 2
-                encoded_data = channel8bits[0:6] + data2bit
-                encoded_bits = encoded_bits + encoded_data
-                if index == data_length:
-                    encoded_bits = encoded_bits + container_as_bits[a + 8:]
-                    break
-                    # out of data
-            decoded_img = self.bits_string_to_image(encoded_bits, (self.container.shape[0], self.container.shape[1]))
-            print("Encoding Successful!")
-            return decoded_img
-        else:
-            raise Exception("Cannot hide data. Using smaller image or less letters")
-
-
-
-
+        for a in range(0, container_length, 8):
+            channel8bits = container_as_bits[a:a + 8]
+            data2bit = data_as_bits_string[index:index + 2]
+            index = index + 2
+            encoded_data = channel8bits[0:6] + data2bit
+            encoded_bits = encoded_bits + encoded_data
+            if index == data_length:
+                encoded_bits = encoded_bits + container_as_bits[a + 8:]
+                break
+                # out of data
+        decoded_img = self.bits_string_to_image(encoded_bits, (self.container.shape[0], self.container.shape[1]))
+        print("Encoding Successful!")
+        return decoded_img
 
     def decode(self, type):
         """
@@ -240,13 +231,23 @@ class Steganography:
         return img
 
     @staticmethod
-    def letter_to_bits_string(str_message):
-        if type(str_message) == str:
-            return ''.join([format(ord(char), '08b') for char in str_message])
-        elif type(str_message) == int or type(str_message) == np.uint8:
-            return ''.join([format(int(str_message), '08b')])
-        else:
-            return None
+    def bits_sequence_to_string(bit_sequence: str):
+        """
+        :param bit_sequence: Using to decode a bit sequence to strings
+        :return: The message decoded
+        """
+        # Chunk
+        chunks = list(grouper(bit_sequence, 8, '0'))
+        chunks = list(map(lambda chunk: chr(int(''.join(chunk), base=2)), chunks))
+        message = ''.join(chunks)
+        return message
+
+    @staticmethod
+    def string_to_bits_sequence(string):
+        if type(string) == str:
+            chunks = list(map(char_to_8_bit_string, string))
+            return ''.join(chunks)
+        raise Exception('Cannot convert')
 
     @staticmethod
     def save(data, type, path):
