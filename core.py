@@ -160,7 +160,7 @@ class Steganography:
         # self.save(container_image, IMAGE, os.path.join(os.getcwd(), 'encoded'))
         # self.decode(IMAGE)
 
-    def decode(self, type=MESSAGE):
+    def decode(self, type=MESSAGE) -> np.ndarray:
         """
         :param type: type of hidden data. If type is MESSAGE, decoded data is message as string. If tyoe is IMAGE, data is image as 3d numpy array
         :return: encoded data
@@ -187,12 +187,12 @@ class Steganography:
             shape_len = 6
             shape: np.ndarray = bits_sequence[(8 * delimiter_len) // 2: (8 * delimiter_len + shape_len * 8) // 2]
             # divide by 2 as we use 2 lsb
-
             shape: list = shape.tolist()
             shape: list = list(map(lambda x: format(x, '02b'), shape))
             shape: str = ''.join(shape)
             shape_tup: tuple = (int(shape[0:16], base=2), int(shape[16:32], base=2), int(shape[32:48], base=2))
 
+            # extract data bits_sequence
             data_len = shape_tup[0] * shape_tup[1] * shape_tup[2]
 
             data: np.ndarray = bits_sequence[(8 * delimiter_len + shape_len * 8) // 2:
@@ -204,8 +204,7 @@ class Steganography:
             data: list = list(map(lambda x: int(''.join(x), base=2), data))
             data: np.ndarray = np.array(data)
             data = data.reshape(shape_tup[0], shape_tup[1], shape_tup[2])
-
-            self.save(data, IMAGE, os.path.join(os.getcwd(), 'wtf'))
+            return data.copy()
 
     @staticmethod
     def bits_sequence_to_image(image):
