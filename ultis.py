@@ -18,7 +18,7 @@ def int_to_16_bit_string(number: int):
 
 def change_lsb(number: int, bits: int, amount=2):
     """
-    :param number: the number which is going to be replace `amount` lsb
+    :param number: the number which is going to be replaced `amount` lsb
     :param bits: the bits kick in lsb position
     :param amount: number of lsb
     :return:
@@ -29,3 +29,13 @@ def change_lsb(number: int, bits: int, amount=2):
     u = u << amount
     u = u + bits
     return u
+
+
+def get_lsb(number, amount=2):
+    """
+    :param number: the number which is going to be extracted
+    :param amount: number of lsb
+    :return:
+    """
+    nu = int('1' * amount,base=2)
+    return number & nu

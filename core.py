@@ -1,17 +1,17 @@
 import numpy
 import numpy as np
 import cv2, sys, os
-from ultis import char_to_8_bit_string, int_to_8_bit_string, int_to_16_bit_string, change_lsb
+from ultis import char_to_8_bit_string, int_to_8_bit_string, int_to_16_bit_string, change_lsb, get_lsb
 
 from more_itertools import grouper
 
-origin = 'original_image.jpeg'
-to_be_hidden_image = 'to_be_hidden_image.jpeg'
-encoded_image = 'encoded_image.png'
-
-to_be_decoded_image = 'to_be_decoded_image.png'
-hidden_image = 'hidden_image.png'
-lena = 'lena.jpg'
+# origin = 'original_image.jpeg'
+# to_be_hidden_image = 'to_be_hidden_image.jpeg'
+# encoded_image = 'encoded_image.png'
+#
+# to_be_decoded_image = 'to_be_decoded_image.png'
+# hidden_image = 'hidden_image.png'
+# lena = 'lena.jpg'
 
 MESSAGE = 'MESSAGE'
 IMAGE = 'IMAGE'
@@ -101,7 +101,7 @@ class Steganography:
 
     # New Code
 
-    def encode(self, data: str, type: str):
+    def encode(self, data: str, type: str) -> np.ndarray:
         """
         :param data: data to be encoded into the container str. If type is MESSAGE, data is the message. If type is IMAGE,
         data is the image path as string
@@ -126,120 +126,86 @@ class Steganography:
         image: np.ndarray = cv2.imread(image_path)
         image_flatten = image.reshape(-1)
         image_shape = image.shape
-
         container_image: np.ndarray = cv2.imread(self.container)
         container_image_flatten = container_image.reshape(-1)
 
+        # encode delimiter for determine which bits-sequence to chose
         delimiter = np.array(list(map(char_to_8_bit_string, self.delimiter)))
         delimiter = np.array(np.vectorize(lambda x: int(x, base=2))(delimiter))
-
+        # also encode shape to reconstruct
         shape = np.array(image_shape)
         shape = np.vectorize(int_to_16_bit_string)(shape)
 
+        # concatenate into a long bits_sequence included: delimiter,shape,IMAGE,delimiter
         data: np.ndarray = np.concatenate((
             np.vectorize(int_to_8_bit_string)(delimiter),
             shape,
             np.vectorize(int_to_8_bit_string)(image_flatten),
             np.vectorize(int_to_8_bit_string)(delimiter)))
-        two_bits_string = list(''.join(data.tolist()))
 
-        chunks = list(grouper(two_bits_string, 2, '0'))
-        chunks = list(map(lambda chunk: int(''.join(chunk), base=2), chunks))
-
+        # Start chunking into array of 2bit
+        chunks = list(''.join(data.tolist()))
+        chunks: list = list(grouper(chunks, 2, '0'))
+        chunks: list = list(map(lambda chunk: int(''.join(chunk), base=2), chunks))
         chunks: np.ndarray = np.array(chunks)
 
         # right shift 2 bits, then left shift 2 bits (remove data), then plus => change 2 lsb
-
+        # replace 2 lsb by 2bit of message to be encoded
         vf = np.vectorize(change_lsb)
         encoded_chunks: np.ndarray = container_image_flatten[:len(chunks)]
-
-        print(encoded_chunks[:20])
-        print(chunks[:20])
         encoded_chunks = vf(encoded_chunks, chunks)
-        print(encoded_chunks[:20])
-
         container_image_flatten[:len(chunks)] = encoded_chunks
-        print(container_image_flatten[:20])
-        print(container_image.reshape(-1)[:20])
 
-        self.save(container_image,IMAGE,os.path.join(os.getcwd(),'encoded'))
-    # bits_sequence = np.vectorize(int_to_8_bit_string)(data)
-    # print(bits_sequence[:10])
+        return container_image.copy()
+        # self.save(container_image, IMAGE, os.path.join(os.getcwd(), 'encoded'))
+        # self.decode(IMAGE)
 
-    # print(np[self.delimiter)
-
-    # data_as_bits_string = ""
-    # if type == MESSAGE:
-    #     formatted_message = '{starts}{content}{terminals}'.format(starts=self.starts, content=data,
-    #                                                               terminals=self.terminals)
-    #     data_as_bits_string = self.letter_to_bits_string(formatted_message)
-    # if type == IMAGE:
-    #     imgbit = self.letter_to_bits_string(self.starts)
-    #     for line in data:
-    #         for pixel in line:
-    #             a = list(map(self.letter_to_bits_string, pixel))
-    #             imgbit = imgbit + ''.join(a)
-    #     imgbit = imgbit + format(data.shape[0], '016b') + format(data.shape[1], '016b')
-    #     data_as_bits_string = imgbit + self.letter_to_bits_string(self.terminals)
-    # container_as_bits = self.image_to_bits_string(self.container)
-    # container_length = len(container_as_bits)
-    # data_length = len(data_as_bits_string)
-    # print("Starting encode...")
-    # index = 0
-    # encoded_bits = ''
-    #
-    # for a in range(0, container_length, 8):
-    #     channel8bits = container_as_bits[a:a + 8]
-    #     data2bit = data_as_bits_string[index:index + 2]
-    #     index = index + 2
-    #     encoded_data = channel8bits[0:6] + data2bit
-    #     encoded_bits = encoded_bits + encoded_data
-    #     if index == data_length:
-    #         encoded_bits = encoded_bits + container_as_bits[a + 8:]
-    #         break
-    #         # out of data
-    # decoded_img = self.bits_string_to_image(encoded_bits, (self.container.shape[0], self.container.shape[1]))
-    # print("Encoding Successful!")
-    # return decoded_img
-
-    def decode(self, type):
+    def decode(self, type=MESSAGE):
         """
         :param type: type of hidden data. If type is MESSAGE, decoded data is message as string. If tyoe is IMAGE, data is image as 3d numpy array
         :return: encoded data
         """
-        # container_as_bits = self.image_to_bits_string(self.container)
-        # last2bits_data = ''
-        # print("Starting convert an image to bits-string...")
-        # for i in range(0, len(container_as_bits), 8):
-        #     last2bits_data = last2bits_data + container_as_bits[i + 6:i + 8]
-        # # convert last 2 bits data into ascii message
-        # message = ''
-        # for i in range(0, len(last2bits_data), 8):
-        #     block = last2bits_data[i:i + 8]
-        #     message += chr(int(block, base=2))
-        #
-        # index = message.find(self.terminals)  # find terminals
-        # print("Starting decode...")
-        # if type == IMAGE:
-        #     size = message[index - 4:index]
-        #     width, height = size[0:2], size[2:]
-        #
-        #     width = int(''.join([format(ord(char), "08b") for char in width]), base=2)
-        #     height = int(''.join([format(ord(char), "08b") for char in height]), base=2)
-        #     shape = (width, height, 3)
-        #     content = message[5:index - 4]
-        #
-        #     data_as_bits = ''.join([format(ord(letter), "08b") for letter in content])
-        #     hidden_img = self.bits_string_to_image(data_as_bits, size=shape)
-        #     print("Decoding successful!")
-        #     return hidden_img
-        # elif type == MESSAGE:
-        #     content = message[5:index]
-        #     print("Decoding successful!")
-        #     return content
-        # else:
-        #     raise Exception("Your container image is not valid!")
-        # pass
+
+        encoded_image: np.ndarray = cv2.imread(os.path.join(os.getcwd(), 'encoded.png'))
+        encoded_image_flatten = encoded_image.reshape(-1)
+        bits_sequence = np.vectorize(get_lsb)(encoded_image_flatten)
+
+        # check maybe first is our delimiter
+        delimiter_len = len(self.delimiter)
+
+        delimiter: np.ndarray = bits_sequence[:(8 * delimiter_len) // 2]
+        delimiter: list = delimiter.tolist()
+        delimiter: list = list(map(lambda x: format(x, '02b'), delimiter))
+        delimiter: str = ''.join(delimiter)
+        delimiter: str = ''.join(self.bits_sequence_to_string(delimiter))
+        if not delimiter == self.delimiter:
+            raise Exception
+
+        if type == IMAGE:
+            # next 6 byte is about the shape
+            # width, height, 3channel => 2 bytes => 6 bytes
+            shape_len = 6
+            shape: np.ndarray = bits_sequence[(8 * delimiter_len) // 2: (8 * delimiter_len + shape_len * 8) // 2]
+            # divide by 2 as we use 2 lsb
+
+            shape: list = shape.tolist()
+            shape: list = list(map(lambda x: format(x, '02b'), shape))
+            shape: str = ''.join(shape)
+            shape_tup: tuple = (int(shape[0:16], base=2), int(shape[16:32], base=2), int(shape[32:48], base=2))
+
+            data_len = shape_tup[0] * shape_tup[1] * shape_tup[2]
+
+            data: np.ndarray = bits_sequence[(8 * delimiter_len + shape_len * 8) // 2:
+                                             (8 * delimiter_len + shape_len * 8 + data_len * 8) // 2]
+            data: list = data.tolist()
+            data: list = list(map(lambda x: format(x, '02b'), data))
+            data: str = ''.join(data)
+            data: list = list(grouper(data, 8, 0))
+            data: list = list(map(lambda x: int(''.join(x), base=2), data))
+            data: np.ndarray = np.array(data)
+            data = data.reshape(shape_tup[0], shape_tup[1], shape_tup[2])
+
+            self.save(data, IMAGE, os.path.join(os.getcwd(), 'wtf'))
 
     @staticmethod
     def bits_sequence_to_image(image):
