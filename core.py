@@ -1,24 +1,15 @@
-import numpy
 import numpy as np
-import cv2, sys, os
-from ultis import char_to_8_bit_string, int_to_8_bit_string, int_to_16_bit_string, change_lsb, get_lsb
-
+import cv2
+import sys
+import os
 from more_itertools import grouper
-
-# origin = 'original_image.jpeg'
-# to_be_hidden_image = 'to_be_hidden_image.jpeg'
-# encoded_image = 'encoded_image.png'
-#
-# to_be_decoded_image = 'to_be_decoded_image.png'
-# hidden_image = 'hidden_image.png'
-# lena = 'lena.jpg'
+from ultis import char_to_8_bit_string, int_to_8_bit_string, int_to_16_bit_string, change_lsb, get_lsb
 
 MESSAGE = 'MESSAGE'
 IMAGE = 'IMAGE'
 
 
 class Steganography:
-
     def __init__(self, container_path, delimiter='!@!@!'):
         if container_path is None:
             raise Exception("Must provide the container image path!")
@@ -39,67 +30,6 @@ class Steganography:
         else:
             raise Exception(f"File type \"{type}\" isn't supported!")
         return container_len >= 4 * data_len
-
-    # def encode(self, data:str, type:str):
-    #     """
-    #     :param data: data to be encoded into the container str. If type is MESSAGE, data is the message. If type is IMAGE, data is the image path as string
-    #     :param type: type of data. Im
-    #     :return: an container image encoded as numpy 3d-array
-    #
-    #     using 2 bits of each channel(3 channels) to hide data -> 6 bits of n-bits-message per pixel.
-    #     1 pixel is 3-bytes(24 bits) so the max size of message length stored is:
-    #     w * h * 24*0.25 - size(delimiter)*2
-    #     delimiter ( default is '@@@@@') symbols is required.
-    #     Example: If we have an 512x512 image, we can hide an 196598-letters-string into it.
-    #     (512x512x8x3x0.25 - 10*8)/8
-    #     """
-    #     if type == IMAGE:
-    #         data = cv2.imread(data)
-    #     elif type == MESSAGE:
-    #         pass
-    #     else:
-    #         raise Exception("Type of encoded data is not supported")
-    #     print("Checking compatible...", )
-    #     if self.is_encodable(type=type, data=data):
-    #         print("Compatible!")
-    #         print("Starting convert data...")
-    #         data_as_bits_string = ""
-    #         if type == MESSAGE:
-    #             formatted_message = '{starts}{content}{terminals}'.format(starts=self.starts, content=data,
-    #                                                                       terminals=self.terminals)
-    #             data_as_bits_string = self.letter_to_bits_string(formatted_message)
-    #         if type == IMAGE:
-    #             imgbit = self.letter_to_bits_string(self.starts)
-    #             for line in data:
-    #                 for pixel in line:
-    #                     a = list(map(self.letter_to_bits_string, pixel))
-    #                     imgbit = imgbit + ''.join(a)
-    #             imgbit = imgbit + format(data.shape[0], '016b') + format(data.shape[1], '016b')
-    #             data_as_bits_string = imgbit + self.letter_to_bits_string(self.terminals)
-    #         container_as_bits = self.image_to_bits_string(self.container)
-    #         container_length = len(container_as_bits)
-    #         data_length = len(data_as_bits_string)
-    #         print("Starting encode...")
-    #         index = 0
-    #         encoded_bits = ''
-    #
-    #         for a in range(0, container_length, 8):
-    #             channel8bits = container_as_bits[a:a + 8]
-    #             data2bit = data_as_bits_string[index:index + 2]
-    #             index = index + 2
-    #             encoded_data = channel8bits[0:6] + data2bit
-    #             encoded_bits = encoded_bits + encoded_data
-    #             if index == data_length:
-    #                 encoded_bits = encoded_bits + container_as_bits[a + 8:]
-    #                 break
-    #                 # out of data
-    #         decoded_img = self.bits_string_to_image(encoded_bits, (self.container.shape[0], self.container.shape[1]))
-    #         print("Encoding Successful!")
-    #         return decoded_img
-    #     else:
-    #         raise Exception("Cannot hide data. Using smaller image or less letters")
-
-    # New Code
 
     def encode(self, data: str, type: str) -> np.ndarray:
         """

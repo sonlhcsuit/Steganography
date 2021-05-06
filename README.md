@@ -18,7 +18,7 @@ $ pip install -r requirements.txt
 
 CLI
 ```shell
-$ python3 cli.py -h
+$ python cli.py -h
 ```
 Author:   
 @Luu Hoang Son  
