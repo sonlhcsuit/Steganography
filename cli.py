@@ -35,7 +35,7 @@ def main(parser, arg):
         if arg.get('action') == 'encode' or (arg.get('action') == 'decode' and arg.get('image')):
             Steganography.save(data_to_save, IMAGE, os.path.join(os.getcwd(), op))
         elif arg.get('action') == 'decode' and not arg.get('image'):
-            Steganography.save(data_to_save, IMAGE, os.path.join(os.getcwd(), op))
+            Steganography.save(data_to_save, MESSAGE, os.path.join(os.getcwd(), op))
 
     except Exception as e:
         # parser.error(e)
