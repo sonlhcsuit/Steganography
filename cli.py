@@ -1,26 +1,45 @@
 from argparse import ArgumentParser, ArgumentError
 import os
+import re
 from core import Steganography, IMAGE, MESSAGE
 
 
 def main(parser, arg):
     try:
-        print(arg)
         current_path = os.getcwd();
         cont_image_path = os.path.join(current_path, arg['container'])
         steg = Steganography(cont_image_path)
+        data_to_save = None
+        op = None
+        # output path
         if arg['action'] == 'encode':
-            if not steg.is_encodable(arg['message'], IMAGE if arg['image'] else MESSAGE):
+            if not steg.is_encodable(arg.get('message'), IMAGE if arg['image'] else MESSAGE):
                 parser.error(f"Cannot encode, data to be encoded must lower than one quarter of container size")
             encoded = steg.encode(arg.get('message'), IMAGE if arg['image'] else MESSAGE)
-            Steganography.save(encoded, IMAGE, os.path.join(os.getcwd(), 'ecd'))
+            # img
+            data_to_save = encoded
         elif arg['action'] == 'decode':
             decoded = steg.decode(type=IMAGE if arg['image'] else MESSAGE)
-            Steganography.save(decoded, IMAGE, os.path.join(os.getcwd(), 'dcd'))
+            # img or string
+            data_to_save = decoded
 
-        # print(encoded)
+        if arg['output']:
+            op: str = arg['output']
+        else:
+            op: str = arg['container']
+
+        op: list = op.split('.')
+        if len(op) > 1:
+            op.pop()
+        op: str = '.'.join(op)
+        if arg.get('action') == 'encode' or (arg.get('action') == 'decode' and arg.get('image')):
+            Steganography.save(data_to_save, IMAGE, os.path.join(os.getcwd(), op))
+        elif arg.get('action') == 'decode' and not arg.get('image'):
+            Steganography.save(data_to_save, IMAGE, os.path.join(os.getcwd(), op))
+
     except Exception as e:
-        parser.error(e)
+        # parser.error(e)
+        raise Exception(e)
 
 
 def parserArgs():
@@ -33,8 +52,9 @@ def parserArgs():
     parser.add_argument('--image', '-i', help="Must be specified if image are selected", action='store_true',
                         default=False)
     parser.add_argument('--delimiter', '-d', help="Custom delimiter, default is \'!@!@!\'")
-    parser.add_argument('--output-name', '-o',
-                        help="Output filepath/filename, if not specified, postfix \"encoded\" or \"decoded\" will be add")
+    parser.add_argument('--output', '-o',
+                        help="Output filepath/filename, if not specified, postfix \"encoded\" or \"decoded\" will be add",
+                        default=None)
 
     args = parser.parse_args()
     if args.action == "encode" and not args.message:
