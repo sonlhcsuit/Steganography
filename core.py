@@ -145,49 +145,6 @@ class Steganography:
             return data.copy()
 
     @staticmethod
-    def bits_sequence_to_image(image):
-        """
-        Convert an image (a numpy 3d-array) into
-        :param image: an image path
-        :return:
-        """
-        try:
-            # for line in container:
-            #     for pixel in line:
-            #         container_as_bits += ''.join(list(map(lambda x:''.join([format(int(x),'08b')]),pixel)))
-            # the same purpose with line 150 but line 150 is faster
-            return ''.join(
-                [''.join([''.join(list(map(lambda x: ''.join([format(int(x), '08b')]), pixel))) for pixel in line]) for
-                 line in image])
-        except Exception:
-            raise Exception("Input is Not Image")
-
-    @staticmethod
-    def image_to_bits_sequence(bits_string, size=None):
-        """
-        :param bits_tring: bit_string left to right and top to down
-        :param size: width, height channel default is 3
-        :return: 3d array -> image
-        """
-        if len(bits_string) % 24 == 0:
-            pass
-        else:
-            raise Exception("Cannot Decoding!")
-        index = 0
-        temp = []
-        for i in range(0, len(bits_string), 24):
-            pixel = bits_string[index:index + 24]
-            newpixel = []
-            for j in range(0, 24, 8):
-                channel = pixel[j:j + 8]  # red g or b
-                newpixel.append(int(channel, base=2))
-            temp.append(newpixel)
-            index += 24
-        a = np.array(temp, dtype=np.uint8)
-        img = np.reshape(a, (size[0], size[1], 3))
-        return img
-
-    @staticmethod
     def bits_sequence_to_string(bit_sequence: str):
         """
         Convert a bit_sequence to string.
