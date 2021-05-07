@@ -75,8 +75,24 @@ class Steganography:
 
             # Start chunking into array of 2bit
         elif type == MESSAGE:
-            bits_data:list = list(map(char_to_8_bit_string, data))
-            bits_data: np.ndarray = np.array(bits_data, dtype=object)
+            # delimiter
+            delimiter = np.array(list(map(char_to_8_bit_string, self.delimiter)))
+            delimiter = np.array(np.vectorize(lambda x: int(x, base=2))(delimiter))
+
+            # data-len (image shape)
+            shape = np.array(len(data))
+            shape = np.vectorize(int_to_16_bit_string)(shape)
+
+            # the message as string
+            bits_data = np.array(list(map(char_to_8_bit_string, data)))
+            bits_data = np.array(np.vectorize(lambda x: int(x, base=2))(bits_data))
+
+            bits_data: np.ndarray = np.concatenate((
+                np.vectorize(int_to_8_bit_string)(delimiter),
+                np.vectorize(int_to_8_bit_string)(shape),
+                np.vectorize(int_to_8_bit_string)(bits_data),
+                np.vectorize(int_to_8_bit_string)(delimiter)))
+
         else:
             raise Exception(f"Expected IMAGE or MESSAGE but got{type}")
 
@@ -94,7 +110,6 @@ class Steganography:
 
         return container_image.copy()
 
-
     def decode(self, type=MESSAGE) -> np.ndarray:
         """
         :param type: type of hidden data. If type is MESSAGE, decoded data is message as string. If tyoe is IMAGE, data is image as 3d numpy array
@@ -109,15 +124,15 @@ class Steganography:
         # check maybe first is our delimiter
         delimiter_len = len(self.delimiter)
         print("Starting decode data...")
-
         print('Checking delimiter')
         delimiter: np.ndarray = bits_sequence[:(8 * delimiter_len) // 2]
         delimiter: list = delimiter.tolist()
         delimiter: list = list(map(lambda x: format(x, '02b'), delimiter))
         delimiter: str = ''.join(delimiter)
         delimiter: str = ''.join(self.bits_sequence_to_string(delimiter))
+        print(delimiter)
         if not delimiter == self.delimiter:
-            raise Exception
+            raise Exception("Cannot decode by invalid encoding format")
         print('Delimiter is correct!\nExtracting data...')
         if type == IMAGE:
             # next 6 byte is about the shape
@@ -143,6 +158,32 @@ class Steganography:
             data: np.ndarray = np.array(data)
             data = data.reshape(shape_tup[0], shape_tup[1], shape_tup[2])
             return data.copy()
+        elif type == MESSAGE:
+            data: np.ndarray = bits_sequence[(8 * delimiter_len) // 2:]
+
+            shape_len = 2
+            shape: np.ndarray = bits_sequence[(8 * delimiter_len) // 2: (8 * delimiter_len + shape_len * 8) // 2]
+            shape: list = shape.tolist()
+            print(shape)
+            shape: list = list(map(lambda x: format(x, '02b'), shape))
+            shape: str = ''.join(shape)
+            print(shape)
+            shape_tup: int = int(shape[0:16], base=2)
+            print(shape_tup)
+            # we can use a better approach by store the message length, but I too lazy
+            #
+            # data: np.ndarray = bits_sequence[(8 * delimiter_len + shape_len * 8) // 2:
+            #                                  (8 * delimiter_len + shape_len * 8 + data_len * 8) // 2]
+            #
+            # data: list = list(map(lambda x: format(x, '02b'), data))
+            # data: str = ''.join(data)
+            # data: list = list(grouper(data, 8, 0))
+            # data: list = list(map(lambda x: int(''.join(x), base=2), data))
+            # print(data)
+            return "?"
+
+        else:
+            raise Exception(f'Cannot decoding due to some stupid reason =]]]]')
 
     @staticmethod
     def bits_sequence_to_string(bit_sequence: str):
