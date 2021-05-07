@@ -128,35 +128,35 @@ class Steganography:
         delimiter: list = list(map(lambda x: format(x, '02b'), delimiter))
         delimiter: str = ''.join(delimiter)
         delimiter: str = ''.join(self.bits_sequence_to_string(delimiter))
-        print(delimiter)
         if not delimiter == self.delimiter:
             raise Exception("Cannot decode by invalid encoding format")
         print('Delimiter is correct!\nExtracting data...')
         if type == IMAGE:
-            pass
-            # # next 6 byte is about the shape
-            # # width, height, 3channel => 2 bytes => 6 bytes
-            # shape_len = 6
-            # shape: np.ndarray = bits_sequence[(8 * delimiter_len) // 2: (8 * delimiter_len + shape_len * 8) // 2]
-            # # divide by 2 as we use 2 lsb
-            # shape: list = shape.tolist()
-            # shape: list = list(map(lambda x: format(x, '02b'), shape))
-            # shape: str = ''.join(shape)
-            # shape_tup: tuple = (int(shape[0:16], base=2), int(shape[16:32], base=2), int(shape[32:48], base=2))
-            #
-            # # extract data bits_sequence
-            # data_len = shape_tup[0] * shape_tup[1] * shape_tup[2]
-            #
-            # data: np.ndarray = bits_sequence[(8 * delimiter_len + shape_len * 8) // 2:
-            #                                  (8 * delimiter_len + shape_len * 8 + data_len * 8) // 2]
-            # data: list = data.tolist()
-            # data: list = list(map(lambda x: format(x, '02b'), data))
-            # data: str = ''.join(data)
-            # data: list = list(grouper(data, 8, 0))
-            # data: list = list(map(lambda x: int(''.join(x), base=2), data))
-            # data: np.ndarray = np.array(data)
-            # data = data.reshape(shape_tup[0], shape_tup[1], shape_tup[2])
-            # return data.copy()
+            # next 6 byte is about the shape
+            # width, height, 3channel => 2 bytes => 6 bytes
+            shape_len = 6
+            shape: np.ndarray = encoded_image_flatten[(8 * delimiter_len) // 2: (8 * delimiter_len + shape_len * 8) // 2]
+            shape = np.vectorize(get_lsb)(shape)
+            # divide by 2 as we use 2 lsb
+            shape: list = shape.tolist()
+            shape: list = list(map(lambda x: format(x, '02b'), shape))
+            shape: str = ''.join(shape)
+            shape_tup: tuple = (int(shape[0:16], base=2), int(shape[16:32], base=2), int(shape[32:48], base=2))
+
+            # extract data bits_sequence
+            data_len = shape_tup[0] * shape_tup[1] * shape_tup[2]
+
+            data: np.ndarray = encoded_image_flatten[(8 * delimiter_len + shape_len * 8) // 2:
+                                             (8 * delimiter_len + shape_len * 8 + data_len * 8) // 2]
+            data = np.vectorize(get_lsb)(data)
+            data: list = data.tolist()
+            data: list = list(map(lambda x: format(x, '02b'), data))
+            data: str = ''.join(data)
+            data: list = list(grouper(data, 8, 0))
+            data: list = list(map(lambda x: int(''.join(x), base=2), data))
+            data: np.ndarray = np.array(data)
+            data = data.reshape(shape_tup[0], shape_tup[1], shape_tup[2])
+            return data.copy()
         elif type == MESSAGE:
             shape_len = 2
             shape = encoded_image_flatten[(8 * delimiter_len) // 2: (8 * delimiter_len + shape_len * 8) // 2]
