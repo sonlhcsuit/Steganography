@@ -6,19 +6,25 @@ Clone it using git:
 ```sh
 $ git clone https://github.com/sonlhcsuit/steganography
 ```
+Install `virtualenv` using `pip`
+```shell
+$ pip3 install virtualenv
+```
 Running:
 ```sh
-$ python3 -m venv ./venv
+$ virtualenv venv ./
+$ source venv/bin/activate
 $ pip install -r requirements.txt
+
 ```
 
 ```sh
-(env)$ python app.py
+(venv) $ python app.py
 ```
 
-CLI
+CLI documentation already in help option
 ```shell
-$ python cli.py -h
+(venv) $ python cli.py -h
 ```
 Author:   
 @Luu Hoang Son  
