@@ -206,10 +206,10 @@ class Steganography:
         raise Exception('Cannot convert string to bit')
 
     @staticmethod
-    def save(data, type, path):
-        if type == MESSAGE:
+    def save(data, option_type, path):
+        if option_type == MESSAGE:
             f = open('{}.txt'.format(path), "w")
             f.write(data)
-        elif type == IMAGE:
+        elif option_type == IMAGE:
             cv2.imwrite("{}.png".format(path), data)
         print("Saving successful!")

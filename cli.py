@@ -1,12 +1,11 @@
-from argparse import ArgumentParser, ArgumentError
+from argparse import ArgumentParser
 import os
-import re
 from core import Steganography, IMAGE, MESSAGE
 
 
 def main(parser, arg):
     try:
-        current_path = os.getcwd();
+        current_path = os.getcwd()
         cont_image_path = os.path.join(current_path, arg['container'])
         steg = Steganography(cont_image_path)
         data_to_save = None
